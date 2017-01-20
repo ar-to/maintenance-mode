@@ -1,0 +1,10 @@
+Options -Indexes
+ErrorDocument 404 /notfound.html
+ErrorDocument 503 /503.html
+RewriteEngine On
+#exclude IP
+RewriteCond %{REMOTE_ADDR} !^70.180.241.252$
+RewriteCond %{REQUEST_URI} !^/503 [NC]
+RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif) [NC]
+Header always set Retry-After "3600"
+RewriteRule .* http://locahost/503.html [R=503,L]
